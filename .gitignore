@@ -1,1 +1,18 @@
+# macOS 系统文件
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Icon?
+.AppleDouble
+.LSOverride
+
+# 桌面服务文件
+Desktop DB
+Desktop DF
+
+# 临时文件
+*.swp
+*~
