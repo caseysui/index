@@ -1,18 +1,12 @@
-# macOS 系统文件
+# macOS metadata
 .DS_Store
-.DS_Store?
+.AppleDouble
 ._*
+
+# Files that might appear on external drives/network
 .Spotlight-V100
 .Trashes
-ehthumbs.db
-Icon?
-.AppleDouble
-.LSOverride
 
-# 桌面服务文件
-Desktop DB
-Desktop DF
-
-# 临时文件
+# Editor temporaries
 *.swp
 *~
