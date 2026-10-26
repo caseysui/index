@@ -1,11 +1,5 @@
 #EXTM3U
 
-#EXTINF:-1,CGTN
-http://sk.cri.cn/am846.m3u8
-
-#EXTINF:-1,环球资讯
-https://sk.cri.cn/905.m3u8
-
 #EXTINF:-1,1.FM - CAFE
 https://strm112.1.fm/caferadio_mobile_mp3
 
@@ -15,15 +9,6 @@ https://strm112.1.fm/ajazz_mobile_mp3
 #EXTINF:-1,1.FM - DEEPHOUSE
 https://strm112.1.fm/deephouse_mobile_mp3
 
-#EXTINF:-1,CNR - 中国之声
-https://ngcdn001.cnr.cn/live/zgzs/index.m3u8
-
-#EXTINF:-1,CNR - 音乐之声
-https://ngcdn001.cnr.cn/live/yyzs/index.m3u8
-
-#EXTINF:-1,CNR - 经典音乐
-https://ngcdn001.cnr.cn/live/dszs/index.m3u8
-
 #EXTINF:-1,AsiaFM - 高清音乐
 http://asiafm.hk:8000/asiafmhd
 
@@ -32,3 +17,76 @@ http://asiafm.hk:8000/asiafm
 
 #EXTINF:-1,AsiaFM - 经典音乐
 http://goldfm.cn:8000/goldfm
+
+#EXTINF:-1,CGTN
+http://sk.cri.cn/am846.m3u8
+
+#EXTINF:-1,环球资讯
+https://sk.cri.cn/905.m3u8
+
+#EXTINF:-1,CNR - 中国之声
+https://ngcdn001.cnr.cn/live/zgzs/index.m3u8
+
+#EXTINF:-1,CNR - 经济之声
+https://ngcdn001.cnr.cn/live/jjzs/index.m3u8
+
+#EXTINF:-1,CNR - 交通广播
+https://ngcdn001.cnr.cn/live/gsgljtgb/index.m3u8
+
+#EXTINF:-1,CNR - 音乐之声
+https://ngcdn001.cnr.cn/live/yyzs/index.m3u8
+
+#EXTINF:-1,CNR - 经典音乐
+https://ngcdn001.cnr.cn/live/dszs/index.m3u8
+
+#EXTINF:-1,CCTV1综合
+https://piccpndali.v.myalicdn.com/audio/cctv1_2.m3u8
+
+#EXTINF:-1,CCTV2财经
+https://piccpndali.v.myalicdn.com/audio/cctv2_2.m3u8
+
+#EXTINF:-1,CCTV3综艺
+https://piccpndali.v.myalicdn.com/audio/cctv3_2.m3u8
+
+#EXTINF:-1,CCTV4国际
+https://piccpndali.v.myalicdn.com/audio/cctv4_2.m3u8
+
+#EXTINF:-1,CCTV5体育
+https://piccpndali.v.myalicdn.com/audio/cctv5_2.m3u8
+
+#EXTINF:-1,CCTV6电影
+https://piccpndali.v.myalicdn.com/audio/cctv6_2.m3u8
+
+#EXTINF:-1,CCTV7国防军事
+https://piccpndali.v.myalicdn.com/audio/cctv7_2.m3u8
+
+#EXTINF:-1,CCTV8电视剧
+https://piccpndali.v.myalicdn.com/audio/cctv8_2.m3u8
+
+#EXTINF:-1,CCTV9纪录
+https://piccpndali.v.myalicdn.com/audio/cctv9_2.m3u8
+
+#EXTINF:-1,CCTV10科教
+https://piccpndali.v.myalicdn.com/audio/cctv10_2.m3u8
+
+#EXTINF:-1,CCTV11戏曲
+https://piccpndali.v.myalicdn.com/audio/cctv11_2.m3u8
+
+#EXTINF:-1,CCTV12社会与法
+https://piccpndali.v.myalicdn.com/audio/cctv12_2.m3u8
+
+#EXTINF:-1,CCTV13新闻
+https://piccpndali.v.myalicdn.com/audio/cctv13_2.m3u8
+
+#EXTINF:-1,CCTV14少儿
+https://piccpndali.v.myalicdn.com/audio/cctv14_2.m3u8
+
+#EXTINF:-1,CCTV15音乐
+https://piccpndali.v.myalicdn.com/audio/cctv15_2.m3u8
+
+#EXTINF:-1,CCTV16奥林匹克
+https://piccpndali.v.myalicdn.com/audio/cctv16_2.m3u8
+
+#EXTINF:-1,CCTV17农村农业
+https://piccpndali.v.myalicdn.com/audio/cctv17_2.m3u8
+
