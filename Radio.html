@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>凯西的电台</title>
+    <link rel="icon" href="/assets/icon.png" type="image/png">
+    <style>
+        :root {
+            --bg-color: #f4f4f9;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #1d1d1f;
+            --accent-color: #007aff;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --card-radius: 24px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #000000;
+                --card-bg: rgba(30, 30, 32, 0.9);
+                --text-color: #f5f5f7;
+                --accent-color: #007aff;
+                --border-color: rgba(255, 255, 255, 0.15);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .player-title {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .player-status {
+            font-size: 11px;
+            opacity: 0.7;
+            font-weight: 600;
+        }
+
+        .now-name {
+            text-align: center;
+            font-size: 16px;
+            padding: 8px 0 14px;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        .item {
+            padding: 10px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .item:hover {
+            background: rgba(0, 122, 255, 0.08);
+        }
+
+        .item.active {
+            background: rgba(0, 122, 255, 0.15);
+            border-color: var(--accent-color);
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-bottom: 20px;
+            text-align: center;
+            font-size: 11px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 上方播放器卡片 -->
+        <div class="glass-card">
+            <div class="player-header">
+                <div class="player-title">RADIO</div>
+                <div id="status" class="player-status">READY</div>
+            </div>
+            <div class="now-name" id="currentName">CLICK ONE</div>
+            <audio id="media" controls preload="none">
+        </div>
+
+        <div class="glass-card">
+            <div id="listWrap"></div>
+        </div>
+    </div>
+    <footer>© 2026 CASEY.</footer>
+
+    <script>
+        const channels = [
+
+            { "name": "1.FM‑CAFE", "url": "https://strm112.1.fm/caferadio_mobile_mp3" },
+            { "name": "1.FM‑JAZZ", "url": "https://strm112.1.fm/ajazz_mobile_mp3" },
+            { "name": "1.FM‑DEEPHOUSE", "url": "https://strm112.1.fm/deephouse_mobile_mp3" },
+            { "name": "AsiaFM高清", "url": "http://asiafm.hk:8000/asiafmhd" },
+            { "name": "AsiaFM亚洲", "url": "http://asiafm.hk:8000/asiafm" },
+            { "name": "AsiaFM经典", "url": "http://goldfm.cn:8000/goldfm" },
+            { "name": "CGTN", "url": "http://sk.cri.cn/am846.m3u8" },
+            { "name": "环球资讯", "url": "https://sk.cri.cn/905.m3u8" },
+            { "name": "中国之声", "url": "https://ngcdn001.cnr.cn/live/zgzs/index.m3u8" },
+            { "name": "经济之声", "url": "https://ngcdn001.cnr.cn/live/jjzs/index.m3u8" },
+            { "name": "交通广播", "url": "https://ngcdn001.cnr.cn/live/gsgljtgb/index.m3u8" },
+            { "name": "音乐之声", "url": "https://ngcdn001.cnr.cn/live/yyzs/index.m3u8" },
+            { "name": "经典音乐", "url": "https://ngcdn001.cnr.cn/live/dszs/index.m3u8" },
+            { "name": "CCTV-1", "url": "https://piccpndali.v.myalicdn.com/audio/cctv1_2.m3u8" },
+            { "name": "CCTV-2", "url": "https://piccpndali.v.myalicdn.com/audio/cctv2_2.m3u8" },
+            { "name": "CCTV-3", "url": "https://piccpndali.v.myalicdn.com/audio/cctv3_2.m3u8" },
+            { "name": "CCTV-4", "url": "https://piccpndali.v.myalicdn.com/audio/cctv4_2.m3u8" },
+            { "name": "CCTV-5", "url": "https://piccpndali.v.myalicdn.com/audio/cctv5_2.m3u8" },
+            { "name": "CCTV-6", "url": "https://piccpndali.v.myalicdn.com/audio/cctv6_2.m3u8" },
+            { "name": "CCTV-7", "url": "https://piccpndali.v.myalicdn.com/audio/cctv7_2.m3u8" },
+            { "name": "CCTV-8", "url": "https://piccpndali.v.myalicdn.com/audio/cctv8_2.m3u8" },
+            { "name": "CCTV-9", "url": "https://piccpndali.v.myalicdn.com/audio/cctv9_2.m3u8" },
+            { "name": "CCTV-10", "url": "https://piccpndali.v.myalicdn.com/audio/cctv10_2.m3u8" },
+            { "name": "CCTV-11", "url": "https://piccpndali.v.myalicdn.com/audio/cctv11_2.m3u8" },
+            { "name": "CCTV-12", "url": "https://piccpndali.v.myalicdn.com/audio/cctv12_2.m3u8" },
+            { "name": "CCTV-13", "url": "https://piccpndali.v.myalicdn.com/audio/cctv13_2.m3u8" },
+            { "name": "CCTV-14", "url": "https://piccpndali.v.myalicdn.com/audio/cctv14_2.m3u8" },
+            { "name": "CCTV-15", "url": "https://piccpndali.v.myalicdn.com/audio/cctv15_2.m3u8" },
+            { "name": "CCTV-16", "url": "https://piccpndali.v.myalicdn.com/audio/cctv16_2.m3u8" },
+            { "name": "CCTV-17", "url": "https://piccpndali.v.myalicdn.com/audio/cctv17_2.m3u8" }
+        ];
+
+        const media = document.getElementById('media');
+        const listWrap = document.getElementById('listWrap');
+        const statusText = document.getElementById('status');
+        const currentNameEl = document.getElementById('currentName');
+
+        let activeIndex = -1;
+        let hls = null;
+
+        function setStatus(text) {
+            statusText.innerText = text;
+        }
+
+        //渲染列表
+        function renderList() {
+            listWrap.innerHTML = '';
+            channels.forEach((ch, idx) => {
+                const div = document.createElement('div');
+                div.className = 'item' + (idx === activeIndex ? ' active' : '');
+                div.textContent = ch.name;
+                div.onclick = () => play(idx);
+                listWrap.appendChild(div);
+            })
+        }
+
+        function play(index) {
+            const c = channels[index];
+            if (!c) return;
+            activeIndex = index;
+            currentNameEl.innerText = c.name;
+            renderList();
+
+            if (hls) {
+                hls.destroy();
+                hls = null;
+            }
+            media.pause();
+            media.removeAttribute('src');
+            media.load();
+
+            const url = c.url;
+            const isHls = /\.m3u8($|\?)/i.test(url);
+            setStatus("Connecting");
+
+            if (isHls && !media.canPlayType('application/vnd.apple.mpegurl') && window.Hls && Hls.isSupported()) {
+                hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(media);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    media.play().then(() => setStatus("Playing")).catch(() => setStatus("Tap to play"));
+                })
+                hls.on(Hls.Events.ERROR, (e, d) => {
+                    if (d.fatal) setStatus("Play Error");
+                })
+            } else {
+                media.src = url;
+                media.play().then(() => setStatus("Playing")).catch(() => setStatus("Tap to play"));
+            }
+        }
+
+        media.addEventListener('playing', () => setStatus("Playing"));
+        media.addEventListener('waiting', () => setStatus("Buffering"));
+        media.addEventListener('error', () => setStatus("Offline"));
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderList();
+        })
+    </script>
+</body>
+
+</html>
